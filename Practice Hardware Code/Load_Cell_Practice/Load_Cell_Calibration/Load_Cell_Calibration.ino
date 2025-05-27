@@ -16,7 +16,8 @@ uint8_t clockPin = 19;
 
 void setup()
 {
-  Serial0.begin(9600);
+  Serial0.begin(115200);
+  delay(3000);
   Serial0.println(__FILE__);
   Serial0.print("HX711_LIB_VERSION: ");
   Serial0.println(HX711_LIB_VERSION);

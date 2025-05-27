@@ -9,15 +9,16 @@ HX711 scale;
 float calibration_factor = 0; //-7050.0; // Calibrate this!
 
 void setup() {
-  Serial0.begin(9600);
+  Serial0.begin(115200);
   Serial0.println("HX711 Calibration Test");
 
   scale.begin(DOUT, SCK);
 
   Serial0.println("Remove all weight from the scale");
   delay(3000);
-  scale.tare();  // Reset the scale to 0
-  Serial0.println("Scale tared. Place a known weight on the scale.");
+  //scale.tare();  // Reset the scale to 0
+  scale.set_offset(1667835); 
+  scale.set_scale(360.172119);
 }
 
 
@@ -26,25 +27,21 @@ void setup() {
 
 void loop() {
   if (scale.is_ready()) {
-    reading = scale.get_units(20); // Average of 10 readings
-    Serial0.print("Reading: ");
+    reading = scale.get_units(25); // Average of 10 readings
+    //Serial0.print("Reading: ");
     Serial0.println(reading);
 
     if(reading > (prev_reading + (reading / 2))) {
-      Serial0.println("New Item?");
-      Serial0.println(reading);
-      Serial0.println(prev_reading);
+      //Serial0.println("New Item?");
     }
     else if (reading < (prev_reading - (reading / 2))) {
-      Serial0.println("Item Removed?");
-      Serial0.println(reading);
-      Serial0.println(prev_reading);
+      //Serial0.println("Item Removed?");
     }
 
     prev_reading = reading;
 
-    delay(1000);
+    delay(10);
   } else {
-    Serial0.println("HX711 not found.");
+    //Serial0.println("HX711 not found.");
   }
 }
