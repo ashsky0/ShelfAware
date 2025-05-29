@@ -4,6 +4,9 @@
 #define DOUT  18  // Connect to HX711 DOUT
 #define SCK   19  // Connect to HX711 SCK
 
+#define SCALE_COEFF -338.108063
+#define SCALE_OFFSET -1416425
+
 HX711 scale;
 
 float calibration_factor = 0; //-7050.0; // Calibrate this!
@@ -17,8 +20,8 @@ void setup() {
   Serial0.println("Remove all weight from the scale");
   delay(3000);
   //scale.tare();  // Reset the scale to 0
-  scale.set_offset(1667835); 
-  scale.set_scale(360.172119);
+  scale.set_offset(SCALE_OFFSET); 
+  scale.set_scale(SCALE_COEFF);
 }
 
 
