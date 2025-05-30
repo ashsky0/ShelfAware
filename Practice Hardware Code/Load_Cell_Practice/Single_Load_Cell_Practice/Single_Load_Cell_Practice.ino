@@ -4,8 +4,8 @@
 #define DOUT  18  // Connect to HX711 DOUT
 #define SCK   19  // Connect to HX711 SCK
 
-#define SCALE_COEFF -338.108063
-#define SCALE_OFFSET -1416425
+#define SCALE_COEFF 338.310394
+#define SCALE_OFFSET 1412837
 
 HX711 scale;
 
@@ -30,7 +30,7 @@ void setup() {
 
 void loop() {
   if (scale.is_ready()) {
-    reading = scale.get_units(25); // Average of 10 readings
+    reading = scale.get_units(); // Average of 10 readings
     //Serial0.print("Reading: ");
     Serial0.println(reading);
 
@@ -43,7 +43,7 @@ void loop() {
 
     prev_reading = reading;
 
-    delay(10);
+    delay(1);
   } else {
     //Serial0.println("HX711 not found.");
   }

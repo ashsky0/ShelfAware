@@ -85,7 +85,7 @@ void calibrate()
   Serial0.print(scale, 6);
   Serial0.print(");\n");
   Serial0.println("in the setup of your project");
-
+  
   Serial0.println("\n\n");
 }
 
